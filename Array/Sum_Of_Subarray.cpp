@@ -1,45 +1,47 @@
-//  This program gives only 1st solution
-
 #include<bits/stdc++.h>
 using namespace std;
+
+vector<int> subarraySum(vector<int>arr, int n, long long reqsum){
+    long long currsum = 0;
+    vector<int> ans;
+    
+    int st=0;
+    
+    for(int end=0; end<n; end++){
+        currsum += arr[end];
+        while(currsum > reqsum && end>st){
+            currsum -= arr[st];    // removing starting number of subarray
+            st++;
+        }
+
+        if(currsum == reqsum){
+            ans.push_back(st+1);
+            ans.push_back(end+1);
+            return ans;
+        }
+    }
+    
+    ans.push_back(-1);            // if such subarray not exist
+    return ans;
+}
 
 int main(){
     int size, reqsum;
     cout<<"Enter the size of array & require sum of subarray: ";
     cin>>size>>reqsum;
 
-    int arr[size];
+    vector<int> arr(size);
     cout<<"Enter the numbers in array: ";
     for(int i=0; i<size; i++){
         cin>>arr[i];
     }
 
-    int i=0, j=0, sum=0, st=-1, en=-1;
-    // while(j<size && sum+arr[j] <= reqsum){
-    //     sum += arr[j];
-    //     j++;
-    // }
 
-    // if(sum == reqsum){
-    //     cout<< i+1 <<" "<< j<<endl;
-    //     return 0;
-    // }
-
-// the following code is fail when reqsum = 0
-    while(j<size){
-        sum += arr[j];
-        while(sum > reqsum){
-            sum -= arr[i];
-            i++;
-        }
-        if(sum == reqsum){
-            st = i+1;
-            en = j+1;
-            break;
-        }
-        j++;
+    vector<int> ans = subarraySum(arr, size, reqsum);
+    cout<<"Start & End index of req subarray: ";
+    for(int i=0; i<ans.size(); i++){
+        cout<<ans[i]<<" ";
     }
-
-    cout<<"Start & End index of req subarray: "<<st<<" "<<en<<endl;
+    
     return 0;
 }
