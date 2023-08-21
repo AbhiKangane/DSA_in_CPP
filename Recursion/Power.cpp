@@ -1,23 +1,33 @@
-#include<iostream>
+// leetcode question no 50
+
+#include <iostream>
 using namespace std;
 
-int power(int x, int pow){
-    if(pow == 0)
+double pow(double n, long long p){
+    if (p == 0)
         return 1;
-    
-    else if(pow == 1)
-        return x;
-    
-    else{
-        if(pow % 2 == 0)
-            return power(x, pow/2) * power(x, pow/2);
-        
-        else
-            return x*power(x, pow/2) * power(x, pow/2);
-    }
+    if (p % 2 == 0)
+        return pow(n * n, p / 2);
+    return n * pow(n * n, (p - 1) / 2);
 }
 
-int main(){
-    cout<<power(3,5);
+double myPow(double n, int p){
+    // base cases
+    if (n == 1)
+        return 1;
+    if (p == 0)
+        return 1;
+    else if (p == 1)
+        return n;
+
+    else if (p < 0)
+        return 1.0 / pow(n, (long long)-1 * p);
+
+    return pow(n, (long long)p);
+}
+
+int main()
+{
+    cout << myPow(3.000, 5);
     return 0;
 }
