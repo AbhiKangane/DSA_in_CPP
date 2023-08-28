@@ -4,45 +4,35 @@ using namespace std;
 
 class Stack{
     int size;
-    queue<int> q1;
-    queue<int> q2;
+    queue<int> q;
     
 public:
-    Stack(){
-        size = 0; //initialize size
-    }
+    Stack(){ }
 
-    void Push(int d){ // moving from 1st q to 2nd q 
-        q2.push(d);
-        size++;
-        while(!q1.empty()){
-            q2.push(q1.front());
-            q1.pop();
+    void Push(int d){
+        q.push(x);
+        for(int i=0; i<q.size()-1; i++){
+            q.push(q.front());
+            q.pop();
         }
-
-        // reversing  using swap
-        queue<int> temp = q1;
-        q1 = q2;
-        q2 = temp;
     }
 
-    void Pop(){ // removing from 1st q starting
-        q1.pop();
-        size--;
+    void Pop(){ // removing from q starting
+        int del = q.front();
+        q.pop();
+        return del;
     }
 
     int Top(){
-        return q1.front();
+        return q.front();
     }
 
     int Size(){
-        return size;
+        return q.size();
     }
     
     bool Empty(){
-        if(size == 0)
-            return true;
-        return false;
+        return q.size()==0;
     }
 };
 
