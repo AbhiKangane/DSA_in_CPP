@@ -17,22 +17,22 @@ class node{
 
 // Solution 1:
 //  for finding positon in innorder array
-int findPosition(int in[], int element, int size){
-    for(int i=0; i<size; i++){
+int findPosition(int in[], int inorderStart, int inorderEnd, int element, int size){
+    for(int i=inorderStart; i<=inorderEnd; i++){
         if(element == in[i])
             return i;
     }
     return -1;
 }
 
-node* Solve(int in[], int pre[], int index, int inorderStart, int inorderEnd, int size){
+node* Solve(int in[], int pre[], int &index, int inorderStart, int inorderEnd, int size){
     //  base case
     if(index >= size || inorderStart > inorderEnd)
         return NULL;
     
     int element = pre[index++];
     node* root = new node(element);
-    int position = findPosition(in,element, size);  // finding position of root in inorder
+    int position = findPosition(in,inorderStart,inorderEnd,element, size);  // finding position of root in inorder
 
     // recursive calls
     root->left = Solve(in, pre, index, inorderStart, position-1, size);
@@ -41,7 +41,7 @@ node* Solve(int in[], int pre[], int index, int inorderStart, int inorderEnd, in
     return root;
 }
 
-node* BuildTree(int in[], int pre[], int size){
+node* buildTree(int in[], int pre[], int size){
     int preOrderIndex = 0;
     node* ans = Solve(in, pre, preOrderIndex, 0, size-1, size);
 
