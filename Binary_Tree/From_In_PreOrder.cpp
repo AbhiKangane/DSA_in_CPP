@@ -41,7 +41,7 @@ node* Solve(int in[], int pre[], int &index, int inorderStart, int inorderEnd, i
     return root;
 }
 
-node* buildTree(int in[], int pre[], int size){
+node* BuildTree(int in[], int pre[], int size){
     int preOrderIndex = 0;
     node* ans = Solve(in, pre, preOrderIndex, 0, size-1, size);
 
