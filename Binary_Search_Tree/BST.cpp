@@ -102,7 +102,7 @@ node* insertIntoBST(node* root, int d){
     if(d < root->data)
         root->left = insertIntoBST(root->left, d);
 
-    else
+    else if(d > root->data)
         root->right = insertIntoBST(root->right, d);
 
     return root;
