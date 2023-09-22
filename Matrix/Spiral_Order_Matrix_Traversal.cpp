@@ -31,12 +31,14 @@ int main(){
             cout<<arr[top_row][j]<<" ";
         }
         top_row++;
+        if(top_row > bottom_row) break;
 
         // for right_Col 
         for(i=top_row; i<=bottom_row; i++){
             cout<<arr[i][right_Col]<<" ";
         }
         right_Col--;
+        if(right_Col < left_Col) break;
 
         // for bottom_row
         for(j=right_Col; j>=left_Col; j--){
