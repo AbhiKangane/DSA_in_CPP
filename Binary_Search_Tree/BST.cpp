@@ -145,13 +145,13 @@ node* deleteFromBST(node* root, int val){
         }
     }
 
-    else if(root->data < val){
-        root->left = deleteFromBST(root->right, val);
+    else if(root->data > val){
+        root->left = deleteFromBST(root->left, val);
         return root;
     }
 
     else{
-        root->right = deleteFromBST(root->left, val);
+        root->right = deleteFromBST(root->right, val);
         return root;
     }
 }
