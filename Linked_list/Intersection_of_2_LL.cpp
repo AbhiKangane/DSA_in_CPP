@@ -88,7 +88,7 @@ int intersection(Node* &head1, Node* &head2){
     }
 
     while (ptr1 != NULL && ptr2 != NULL){
-        if(ptr1->data == ptr2->data)
+        if(ptr1 == ptr2)
             return ptr1->data;
         
         ptr1 = ptr1->next;
