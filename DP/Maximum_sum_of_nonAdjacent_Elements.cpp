@@ -40,7 +40,7 @@ int solveTab(vector<int> &nums){
     dp[0] = nums[0];
 
     for(int i=1; i<n; i++){
-        int incl=dp[0];
+        int incl = nums[0];
         if(i>1)
             incl = dp[i-2] + nums[i];
         int excl = dp[i-1];
@@ -77,7 +77,7 @@ int maximum_NonAdajacent_Sum(vector<int> &nums){
     // vector<int> dp(n, -1);
     // return solveMem(nums, n-1, dp);
 
-// sol 3 : returns garbage values
+// sol 3 
     // return solveTab(nums);
 
 // sol 4
