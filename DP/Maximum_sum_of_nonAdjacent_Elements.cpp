@@ -40,7 +40,7 @@ int solveTab(vector<int> &nums){
     dp[0] = nums[0];
 
     for(int i=1; i<n; i++){
-        int incl = nums[0];
+        int incl = nums[1];
         if(i>1)
             incl = dp[i-2] + nums[i];
         int excl = dp[i-1];
