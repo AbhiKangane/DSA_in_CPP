@@ -65,8 +65,8 @@ int solve4(vector<int> &cost, int n){
     for (int i = 2; i < n; i++){
         int curr = cost[i] + min(prev1, prev2);
         // shifting variables
-        prev1 = curr;
         prev2 = prev1;
+        prev1 = curr;
     }
     
     return min(prev1, prev2);
