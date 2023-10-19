@@ -32,7 +32,7 @@ int solveMem(vector<int> &nums, int n , vector<int> &dp){
     return dp[n];
 }
 
-// dp(tabulation)  : not work properly?
+// dp(tabulation)
 int solveTab(vector<int> &nums){
     int n = nums.size();
     vector<int> dp(n, 0);
@@ -40,7 +40,9 @@ int solveTab(vector<int> &nums){
     dp[0] = nums[0];
 
     for(int i=1; i<n; i++){
-        int incl = dp[i-2] + nums[i];
+        int incl=dp[0];
+        if(i>1)
+            incl = dp[i-2] + nums[i];
         int excl = dp[i-1];
         dp[i] = max(incl, excl);
     }
