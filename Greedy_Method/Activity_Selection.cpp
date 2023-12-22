@@ -4,7 +4,7 @@
 
 // You are given n activities with their start & finish time
 // select maximum no. of activities that can be performed by a single person,
-// assuming that a person can only work on a siingle activity at a time
+// assuming that a person can only work on a single activity at a time
 #include<bits/stdc++.h>
 using namespace std;
 
