@@ -8,15 +8,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int main(){
-    int n; cout<<"Enter the size of array : "; cin>>n;
-
+vector<int> maxMeetings(int n, vector<int> &start, vector<int> &end){
     vector<pair<pair<int,int>, int>> v;
-    cout<<"Enter acivities int pair(start & time) in array : ";
+    // Enter meetings int pair(start & end time) in array : ";
     for (int i = 0; i < n; i++){
-        int start, end;
-        cin>>start>>end;
-        v.push_back({{start,end}, i});  // here i takes for storing original activity number
+        v.push_back({{start[i],end[i]}, i});  // here i takes for storing original activity number
     }
 
     // sorting activites w.r.t. end time
@@ -25,22 +21,43 @@ int main(){
     });
 
     int take = 1;  // always take 1st activity after sorting w.r.t. end time
-    int end = v[0].second;  // end time of 1st activity
+    int endTime = v[0].first.second;  // end time of 1st activity
     
     // creating vector for storing selected activity number
     vector<int> ans;
     ans.push_back(v[0].second+1);
 
     for (int i = 1; i < n; i++){
-        if(v[i].first.first > end){   // prev activity ka end time < curr activity ka start
+        if(v[i].first.first > endTime){   // prev activity ka endTime < curr activity ka start
             take ++;
             ans.push_back(v[i].second+1);
-            end = v[i].first.second;
+            endTime = v[i].first.second;
         }
     }
-    cout<<"Max number of activities selected are: "<<take<<endl; // this is sol for Activity selection problem
     
-    cout<<"Following activities are selected : "<<take<<endl;
+    sort(ans.begin(), ans.end());
+    
+    return ans;
+}
+
+int main(){
+    int n; cout<<"Enter the no. of meetings or activities : "; 
+    cin>>n;
+
+    vector<int> start(n), end(n);
+    cout<<"Enter acivities or meetings time into start & end array : ";
+    for (int i = 0; i < n; i++){
+        int st, e;
+        cin>>st>>e;
+        start[i] = st;
+        end[i] = e;
+    }
+
+    vector<int> ans = maxMeetings(n, start, end);
+
+    cout<<"Max number of activities selected are: "<<ans.size()<<endl; // this is sol for Activity selection problem
+    
+    cout<<"Following activities are selected : "<<endl;
     for(int i=0; i<ans.size(); i++){
         cout<<ans[i]<<" ";                                 // this is sol for "Maximum meetings in one room gfg question"
     }
