@@ -5,26 +5,28 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+const int mod = 1e9+7;
+    
 // recursive sol
 long long solveRec(int dice, int faces, int target){
     // base cases
     if(target < 0)
         return 0;
-    
+
     if(dice == 0 && target != 0)
         return 0;
-   
+
     if(dice != 0 && target == 0)
         return 0;
-    
+
     if(dice == 0 && target == 0)
         return 1;
-    
+
     long long ans = 0;
     for (int i = 1; i <= faces; i++){
-        ans = ans + solveRec(dice-1, faces, target-i);
+        ans = (ans%mod + solveRec(dice-1, faces, target-i)%mod)%mod;
     }
-    
+
     return ans;
 }
 
@@ -33,24 +35,24 @@ long long solveMem(int dice, int faces, int target, vector<vector<long long>> &d
     // base cases
     if(target < 0)
         return 0;
-    
+
     if(dice == 0 && target != 0)
         return 0;
-   
+
     if(dice != 0 && target == 0)
         return 0;
-    
+
     if(dice == 0 && target == 0)
         return 1;
-    
+
     if(dp[dice][target] != -1)
         return dp[dice][target];
 
     long long ans = 0;
     for (int i = 1; i <= faces; i++){
-        ans = ans + solveMem(dice-1, faces, target-i, dp);
+        ans = (ans%mod + solveMem(dice-1, faces, target-i, dp)%mod)%mod;
     }
-    
+
     return dp[dice][target] = ans;
 }
 
@@ -58,19 +60,19 @@ long long solveMem(int dice, int faces, int target, vector<vector<long long>> &d
 long long solveTab(int dice, int faces, int target){
     vector<vector<long long>> dp(dice+1, vector<long long>(target+1, 0));
     // analysing base cases    
-   dp[0][0] = 1;
-    
+    dp[0][0] = 1;
+
     for (int i = 1; i <= dice; i++){
         for(int j=1; j <= target; j++){
             long long ans = 0;
             for (int k = 1; k <= faces; k++){
                 if(j-k >= 0)
-                    ans = ans + dp[i-1][j-k];
+                    ans = (ans%mod + dp[i-1][j-k]%mod)%mod;
             }
             dp[i][j] = ans;
         }
     }
-    
+
     return dp[dice][target];
 }
 
@@ -80,34 +82,39 @@ long long solve_SO(int dice, int faces, int target){
     vector<long long> prev(target+1, 0);
     // analysing base cases    
     prev[0] = 1;
-    
+
     for (int i = 1; i <= dice; i++){
         for(int j=1; j <= target; j++){
             long long ans = 0;
             for (int k = 1; k <= faces; k++){
                 if(j-k >= 0)
-                    ans = ans + prev[j-k];
+                    ans = (ans%mod + prev[j-k]%mod)%mod;
             }
             curr[j] = ans;
         }
         prev = curr;
     }
-    
+
     return prev[target];
 }
 
 
-// driver function
-long long noOfWays(int D, int F, int T){
-// sol 1
-    // return solveRec(D,F,T);
-// sol 2
-    // vector<vector<long long>> dp(D+1, vector<long long>(T+1, -1));
-    // return solveMem(D,F,T, dp);
-// sol 2
-    // return solveTab(D,F,T);
-// sol 2
-    return solve_SO(D,F,T);
+int numRollsToTarget(int dice, int faces, int target) {
+    if(target < dice && target>dice*faces)
+        return 0;
+    
+    // sol 1: recursion => Gives TLE
+    // return solveRec(dice,faces,target);
+    
+    // sol 2: Memoization
+    // vector<vector<long long>> dp(dice+1, vector<long long>(target+1, -1));
+    // return solveMem(dice,faces,target,dp);
+    
+    // sol 3: Tabulation
+    // return solveTab(dice,faces,target);
+    
+    // sol 4: Space Optimization
+    return solve_SO(dice,faces,target);
 }
 
 int main(){
@@ -115,6 +122,6 @@ int main(){
         no_of_Faces = 6,
         target = 11;
 
-    cout<<"Total no. of ways of making target : "<<noOfWays(no_of_Dices, no_of_Faces, target);
+    cout<<"Total no. of ways of making target : "<<numRollsToTarget(no_of_Dices, no_of_Faces, target);
     return 0;
 }
