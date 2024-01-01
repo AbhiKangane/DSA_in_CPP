@@ -38,16 +38,16 @@ int solveTab(vector<int> &arr) {
     int n = arr.size(), ans=0;
     vector<int> dp(n, 1); // Initialize a DP array to store the length of LIS ending at each index
 
-    for (int i = 1; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         for (int j = 0; j < i; j++) {
             if (arr[i] > arr[j]) {
                 dp[i] = max(dp[i], dp[j]+1);
             }
         }
-        // ans = max(ans, dp[i]);
+        ans = max(ans, dp[i]);
     }
 
-    return dp[n-1];
+    return ans;
 }
 
 // driver function
