@@ -107,7 +107,7 @@ int solve_Optimal(int n , vector<int> &a){
 
 
 // driver function
-int max_increasing_SubSequence(int n, vector<int> &a){
+int Longest_increasing_SubSequence(int n, vector<int> &a){
 // sol1
     // return solveRec(n,a,0,-1);
 
