@@ -1,4 +1,4 @@
-// gfg que: finding longest increasing subsequence of given array
+// gfg & leetcode que: finding length of longest increasing subsequence from given array
 // this problem used in russian dolls question
 #include<bits/stdc++.h>
 using namespace std;
@@ -11,7 +11,7 @@ int solveRec(int n, vector<int> &a, int curr, int prev){
 
     // include
     int take = 0;
-    if(prev != -1 || a[curr] > a[prev])
+    if(prev == -1 || a[curr] > a[prev])
         take = 1 + solveRec(n,a,curr+1,curr);
     
     // exclude
@@ -32,7 +32,7 @@ int solveMem(int n, vector<int> &a, int curr, int prev, vector<vector<int>> &dp)
 
     // include
     int take = 0;
-    if(prev != -1 || a[prev] < a[curr])
+    if(prev == -1 || a[prev] < a[curr])
         take = 1 + solveMem(n,a,curr+1,curr,dp);
     
     // exclude
@@ -49,7 +49,7 @@ int solveTab(int n, vector<int> &a){
         for (int prev = curr-1; prev >= -1; prev--){
             // include
             int take = 0;
-            if(prev != -1 || a[prev] < a[curr])
+            if(prev == -1 || a[prev] < a[curr])
                 take = 1 + dp[curr+1][curr+1];
     
             // exclude
@@ -70,7 +70,7 @@ int solve_SO(int n, vector<int> &a){
         for (int prev = curr-1; prev >= -1; prev--){
             // include
             int take = 0;
-            if(prev != -1 || a[prev] < a[curr])
+            if(prev == -1 || a[prev] < a[curr])
                 take = 1 + nextRow[curr+1];
     
             // exclude
@@ -83,7 +83,7 @@ int solve_SO(int n, vector<int> &a){
     return nextRow[0];
 }
 
-// optimal sol : only this solution works, others are not working why?
+// optimal sol : 
 int solve_Optimal(int n , vector<int> &a){
     if(n==0)
         return 0;
@@ -128,5 +128,5 @@ int main(){
     vector<int> a = {1,5,7,2,4,9,10};
     int n = a.size();
     // cout<<n<<endl;
-    cout<<max_increasing_SubSequence(7,a);
+    cout<<Longest_increasing_SubSequence(7,a);
 }
