@@ -59,12 +59,12 @@ private:
     // iterative reversing linked list
     Node* reverse(Node* &head){
 	    Node *prev = NULL;
-    	Node *curr = head;
+    	    Node *curr = head;
 	    Node *next = NULL;
 	
     	while(curr != NULL){
 	    	next = curr -> next;
-		    curr -> next = prev;
+	        curr -> next = prev;
     		prev = curr;
 	    	curr = next;
 	    }
