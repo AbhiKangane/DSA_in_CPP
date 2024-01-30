@@ -25,7 +25,7 @@ public:
 
     void push(int val){  //insert at last
         Node* p = new Node(val);
-
+        // if q is empty
         if(front == NULL){
             rear = p;
             front = p;
