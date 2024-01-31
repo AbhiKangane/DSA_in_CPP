@@ -1,3 +1,7 @@
+// solution for 
+// leetcode 238 : https://leetcode.com/problems/implement-trie-prefix-tree/
+// GFG : https://www.geeksforgeeks.org/problems/trie-insert-and-search0651/1
+
 #include<iostream>
 #include<vector>
 using namespace std;
@@ -51,6 +55,21 @@ class Trie{
             i++;
         }
         return it->end;
+    }
+
+    // Returns true if there is a previously inserted string word that has the prefix prefix, and false otherwise.
+    bool startsWith(string prefix) {
+        int i=0;
+        Node* it = trie;
+
+        while (i<prefix.size()){
+            if(it->next[prefix[i] - 'a'] == NULL){ // if node doesn't exist
+               return false;
+            }
+            it = it->next[prefix[i] - 'a'];
+            i++;
+        }
+        return true;
     }
 };
 
