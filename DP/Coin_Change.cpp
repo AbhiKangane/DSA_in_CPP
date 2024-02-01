@@ -50,7 +50,7 @@ int solveMem(vector<int>& coins, int amount, int n, vector<vector<int>> &dp){
 // sol 3 : Tabulation
 int solveTab(vector<int>& coins, int amount){
     int n = coins.size();
-    vector<vector<int>> dp(13, vector<int>(10001, -1));
+    vector<vector<int>> dp(n+1, vector<int>(amount+1, -1));
     
     for(int j=1; j<=amount; j++)
         dp[0][j] =  INT_MAX - 1;     // for 1st row or if size of coins array is 0
@@ -83,7 +83,7 @@ int coinChange(vector<int>& coins, int amount) {
     // 1 <= coins.length <= 12
     // 1 <= coins[i] <= 2^31 - 1
     // 0 <= amount <= 10^4
-    // vector<vector<int>> dp(13,vector<int>(10001,-1));
+    // vector<vector<int>> dp(n+1,vector<int>(amount+1,-1));
     // ans = solveMem(coins, amount, n, dp);
     
     
