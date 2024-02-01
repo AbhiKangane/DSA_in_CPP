@@ -7,10 +7,11 @@ using namespace std;
 // recursive sol for target sum
 bool solveRec(int index, vector<int> &arr, int size, int target){
     // base case
-    if(index >= size || target < 0)
-        return 0;
     if(target == 0)
         return 1;
+    
+    if(index >= size || target < 0)
+        return 0;
 
     bool incl = solveRec(index+1, arr, size, target-arr[index]);
     bool excl = solveRec(index+1, arr, size, target);
@@ -21,11 +22,12 @@ bool solveRec(int index, vector<int> &arr, int size, int target){
 // recursive memoization sol for target sum
 bool solveMem(int index, vector<int> &arr, int size, int target, vector<vector<int>> &dp){
     // base case
-    if(index >= size || target < 0)
-        return 0;
     if(target == 0)
         return 1;
 
+    if(index >= size || target < 0)
+        return 0;
+    
     if(dp[index][target] != -1)
         return dp[index][target];
 
