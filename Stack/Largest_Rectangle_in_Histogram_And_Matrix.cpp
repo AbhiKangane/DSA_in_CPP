@@ -4,7 +4,7 @@
 #include<stack>
 using namespace std;
 
-// 2nd approach using stack
+// 1st approach using stack
 int get_Max_Area(vector<int> a){
     int n = a.size(), ans=0, i=0;
     a.push_back(0);  // for making last bar of '0' height
@@ -30,7 +30,7 @@ int get_Max_Area(vector<int> a){
     return ans;
 }
 
-// 3rd approach : Love Babbar
+// 2nd approach : Love Babbar
 class Solution {
 private:
     vector<int> nextSmallerElement(vector<int> arr, int n) {
@@ -94,7 +94,7 @@ public:
         return area;
     }
 
-// for largest rectangle area in histogram
+// for largest rectangle area in matrix
     int largestRectangleArea_inMatrix(vector<vector<int>>& matrix){
         int maxi = INT32_MIN;
         int maxWidth = matrix[0].size();
