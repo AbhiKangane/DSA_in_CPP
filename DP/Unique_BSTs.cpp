@@ -1,10 +1,11 @@
 // given integer n, return structurely unique BSTs having exactly n nodes of unique values from 1 to n
 // it will be equals to catalan number of of n
 // => (2n !) / [(n+1 !)* (n !)]  => (n+2)*(n+3)*...(2n) / n!  => product of((n+k)/k) terms where 2 <= k <= n
-// => 1, 1, 2, 5, 14, ....           for n = 0 to ...
+// => 1, 1, 2, 5, 14, ....           for n = 0 to ...       =>  CATALAN SERIES
 #include<bits/stdc++.h>
 using namespace std;
 
+//it gives incorrect output for values >= 19
 int solve_SO(int n) {
     long double ans = 1;
     for (int k = 2; k <= n; k++){
@@ -57,7 +58,7 @@ int solveMem(int n, vector<int> &dp){
 
     int ans = 0;
     for (int i = 1; i <= n; i++){  // here i is denoted root of BST
-        ans += solveMem(i-1, dp)/*left subtree*/ * solveMem(n-i, dp)/*right subtree*/;
+        ans = (ans + (1LL*solveMem(i-1, dp)/*left subtree*/ * solveMem(n-i, dp))%mod)%mod/*right subtree*/;
     }
     return dp[n] = ans;
 }
@@ -72,7 +73,7 @@ int solveTab(int n){
     for (int i = 2; i<=n; i++){
         // j -> root node
         for(int j=1; j<=i; j++){
-            dp[i] += dp[j-1] * dp[i-j];
+            dp[i] = (dp[i] + (1LL* dp[j-1] * dp[i-j])%mod)%mod;
         }
     }
     
