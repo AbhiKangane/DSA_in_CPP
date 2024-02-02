@@ -5,32 +5,88 @@
 using namespace std;
 
 // 1st approach using stack
-int get_Max_Area(vector<int> a){
-    int n = a.size(), ans=0, i=0;
-    a.push_back(0);  // for making last bar of '0' height
+int largestRectangleArea_inHistogram_1(vector<int>& heights) {
+    int n = heights.size();
+    vector<int> leftsmall(n), rightsmall(n);
     stack<int> st;
-
-    while(i<n){
-        while(!st.empty() && a[st.top()] > a[i]){
-            int t = st.top();
-            int height = a[t];
+    
+    // computing left small array
+    for(int i=0;i<n;i++){
+        while(!st.empty() && heights[st.top()] >= heights[i]){
             st.pop();
-            if(st.empty()){  // then there is minimum height
-                ans = max(ans, i*height);
-            }
-            else{
-                int len = i-st.top()-1;
-                ans = max(ans, len*height);
-            }
         }
+        if(st.empty()) leftsmall[i] = 0;
+        else leftsmall[i] = st.top() + 1;
+        
         st.push(i);
-        i++;
     }
-
-    return ans;
+    // clear the stack
+    while(!st.empty()) st.pop();
+    // computing right small array
+    for(int i=n-1;i>=0;i--){
+        while(!st.empty() && heights[st.top()] >= heights[i]){
+            st.pop();
+        }
+        if(st.empty()) rightsmall[i] = n-1;
+        else rightsmall[i] = st.top() - 1;
+        
+        st.push(i);
+    }
+    
+    // computing final ans
+    int maxi = INT_MIN;
+    for(int i=0;i<n;i++){
+        int temp = (rightsmall[i] - leftsmall[i] + 1) * heights[i];
+        maxi = max(maxi,temp);
+    }
+    return maxi;
 }
 
-// 2nd approach : Love Babbar
+// 2nd approach : using stack
+int largestRectangleArea_inHistogram_2(vector<int>& hist) {
+    int n= hist.size();
+    stack<int> s; 
+  
+    int max_area = 0; // Initialize max area 
+    int tp; // To store top of stack 
+    int area_with_top; // To store area with top bar as the smallest bar 
+  
+    int i = 0; 
+    while (i < n) { 
+        // If this bar is higher than the bar on top stack, push it to stack 
+        if (s.empty() || hist[s.top()] <= hist[i]) 
+            s.push(i++); 
+  
+        // If this bar is lower than top of stack, then calculate area of rectangle with stack top as the smallest (or minimum height) bar. 
+        // 'i' is 'right index' for the top and element before top in stack is 'left index' 
+        else { 
+            tp = s.top();
+            s.pop();
+  
+            // Calculate the area with hist[tp] stack as smallest bar 
+            area_with_top = hist[tp] * (s.empty() ? i : i - s.top() - 1); 
+            
+            if (max_area < area_with_top) 
+                max_area = area_with_top; 
+        } 
+    } 
+  
+    // Now pop the remaining bars from stack and calculate area with every popped bar as the smallest bar 
+    while (s.empty() == false) { 
+        tp = s.top(); 
+        s.pop(); 
+        area_with_top 
+            = hist[tp] * (s.empty() ? i : i - s.top() - 1); 
+  
+        if (max_area < area_with_top) 
+            max_area = area_with_top; 
+    } 
+  
+    return max_area; 
+}
+
+
+// 3rd approach : By Love Babbar using nextSmallerElement & prevSmallerElement
 class Solution {
 private:
     vector<int> nextSmallerElement(vector<int> arr, int n) {
