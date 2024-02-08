@@ -1,3 +1,4 @@
+// leetcode 279 : Perfect Squares
 // for given integer n return minimum squares of any number required that sums n
 #include<bits/stdc++.h>
 using namespace std;
@@ -25,7 +26,7 @@ int solveMem(int n, vector<int> &dp){
 
     int ans = n;
     for(int i=1; i*i<=n; i++){
-        ans = min(ans, 1+solveRec(n-i*i));
+        ans = min(ans, 1+solveMem(n-i*i, dp))
     }
 
     dp[n] = ans;
