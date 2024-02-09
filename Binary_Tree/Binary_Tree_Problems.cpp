@@ -173,6 +173,7 @@ bool isIdentical(node* root1, node* root2){
 }
 
 // Que 5) function for checking sum tree: Tree in which parent->data = (leftsub -> data + rightsub -> data)
+// sol 1:
 pair<bool,int> isSumTreeFast(node *root){
     // base case 1
     if(root == NULL){
@@ -201,8 +202,38 @@ pair<bool,int> isSumTreeFast(node *root){
     return ans;
 }
 
+// sol 2:
+bool isSumTree2(node* root){
+    if(!root->left && !root->right)   // if child node
+        return 1;
+    
+    if(root->left && root->right){   // if both child nodes are presents
+        if(root->data != root->left->data + root->right->data)
+            return 0;
+        
+        return isSumTree(root->left) && isSumTree(root->right);
+    }
+    
+    else if(!root->left){           // if only right child node is present
+        if(root->data != root->right->data)
+            return 0;
+        return isSumTree(root->right);
+    }
+    
+    else{                           // if only left child node is present
+        if(root->data != root->left->data)
+            return 0;
+        return isSumTree(root->left);
+    }
+        
+}
+
 bool isSumTree(node *root){
-    return isSumTreeFast(root).first;
+    // sol 1
+    // return isSumTreeFast(root).first;
+
+    // sol 2
+    return isSumTree2(root);
 }
 
 int main(){
