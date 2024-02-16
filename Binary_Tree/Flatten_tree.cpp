@@ -32,7 +32,7 @@ node* build_tree(node* root){  // traversal is a preorder
     return root;
 }
 
-// sol 1 : function for flat a tree  (main sol)
+// sol 1 : Iterative function for flat a tree 
 void Flatten(node* root){
     node* curr = root;
     while(curr != NULL){
@@ -50,7 +50,32 @@ void Flatten(node* root){
     }
 }
 
-// sol 2: starts
+// sol 2: Recursive sol
+void flattenRec(node *root){
+    if(!root->left && !root->right)
+        return;
+    
+    if(root->left){
+        flattenRec(root->left);
+        
+        node* storesRight = root->right;
+        root->right = root->left;
+        root->left = NULL;
+        
+        node* storesOrgLeft = root->right; // it actually stores original left node
+        
+        while(storesOrgLeft->right){
+            storesOrgLeft = storesOrgLeft->right;
+        }
+        
+        storesOrgLeft->right = storesRight;
+    }
+    
+    flattenRec(root->right);
+}
+
+
+// sol 3: starts
 // inorder
 void inorderBST(node* root, vector<int> &in){
     if(root == NULL)
@@ -114,6 +139,10 @@ int main(){
     // 1 2 4 8 -1 -1 9 -1 -1 5 -1 -1 3 6 -1 -1 7 -1 -1
 
     Flatten(root);
+    cout<<"\nPrinting Flatten LL of tree: \n";
+    PrintLL(root);
+
+    flattenRec(root);
     cout<<"\nPrinting Flatten LL of tree: \n";
     PrintLL(root);
 
