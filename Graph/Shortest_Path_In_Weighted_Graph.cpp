@@ -1,5 +1,4 @@
 //  shortest path in DAG(Directed Acyclic Graph)
-
 #include<stack>
 #include<unordered_map>
 #include<iostream>
@@ -35,7 +34,7 @@ class Graph{
             if(!visited[neighbour.first])
                 dfs(neighbour.first, visited, topo);
         }
-        topo.push(node);
+        topo.push(node);   // pushing node into stack while returning, the stack stores topological sort of graph
     }
 
     void getShortest_Path(int src, vector<int> &dist, stack<int> &topo){
@@ -57,11 +56,11 @@ class Graph{
 
 int main(){
 /*       2           3          5   
-    1-----------3--------- 4--------- 5
-    |                                |
+    1----------> 3-------> 4--------> 5
+    ^                                ^
   1 |                                |  -1
     |        6                 7     |
-    0 ---------------- 2 ----------- 6
+    0 ----------------> 2 ---------> 6
  
 */
     Graph g;
@@ -71,7 +70,7 @@ int main(){
     g.addEdge(2, 6,7);
     g.addEdge(3, 4,3);
     g.addEdge(4, 5,5);
-    g.addEdge(5, 6,-1);
+    g.addEdge(6, 5,-1);
     
     g.printAdj();
 
@@ -85,7 +84,7 @@ int main(){
             g.dfs(i, visited, s);
     }
 
-    int src = 0;
+    int src = 1;
     vector<int> dist(V);
 
     // initialize distance between src node & other nodes equals to infinity or INT_MAX
@@ -95,8 +94,12 @@ int main(){
     g.getShortest_Path(src, dist, s);
 
     cout<<"Shortest distance between src node & other nodes: "<<endl;
-    for(int i=0; i<dist.size(); i++)
-        cout<<dist[i]<<" ";
+    for(int i=0; i<dist.size(); i++){
+        if(dist[i]!=INT32_MAX)
+            cout<<dist[i]<<" ";
+        else
+            cout<<"INF"<<" ";
+    }
 
     return 0;
 }
