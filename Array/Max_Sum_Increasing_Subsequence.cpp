@@ -3,10 +3,10 @@
 using namespace std;
 
 class Solution{
-	public:
-	int maxSumIS(int arr[], int n)  
-	{  
-	    int msis[n];
+    public:
+    int maxSumIS(int arr[], int n)  
+    {  
+        int msis[n];
         msis[0] = arr[0];
         int res = msis[0];
     
@@ -25,7 +25,7 @@ class Solution{
         //     cout<<msis[i]<<" ";
 
         return res;
-	}
+    }
 };
 
 int main(){
