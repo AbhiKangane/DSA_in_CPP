@@ -1,3 +1,4 @@
+// find the maximum sum subarray of size k having sum at most maxSum
 #include<iostream>
 using namespace std;
 
@@ -22,7 +23,7 @@ int maxSum_Subsequence(int arr[], int n, int k, int maxSum){
 
 int main(){
     int arr[] = {2,4,1,3,6,5,9,8};
-    int n = 8, k = 3, maxSum = 15;
+    int n = 8, windowSize = 3, maxSum = 15;
 
-    cout<<maxSum_Subsequence(arr,n,k,maxSum);
+    cout<<maxSum_Subsequence(arr,n,windowSize,maxSum);
 }
