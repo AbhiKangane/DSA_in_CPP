@@ -13,7 +13,6 @@ std::vector<int> largestSumSubsequence(const std::vector<int>& array) {
 
     for (int i = 1; i < n; ++i) {
         if((currentSum < 0) && (array[i] > currentSum)){ 
-        // if ((array[i] > currentSum)){
         // if (array[i] > (currentSum + array[i])) {
             currentSum = array[i];
             tempStart = i;
