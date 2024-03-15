@@ -77,7 +77,7 @@ Node* RotateK(Node* head, int k){
         }
 
         if(count == l - k + 1){
-            newHead = tail; // setting newTail
+            newHead = tail; // setting newHead
         }
         tail = tail->next;
         count++;
