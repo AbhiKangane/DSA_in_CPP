@@ -45,17 +45,10 @@ int main(){
     // cout<<maxSum;
 
 // 3rd Method: Kadane algorithm
-    int currentSum  = 0;
+    int currentSum  = arr[0];
     int maxSum = arr[0];
 
     for(i=0; i<4; i++){
-        // sol 1
-        // currentSum += arr[i];
-        // maxSum = max(maxSum, currentSum);
-        // if(currentSum < 0)
-        //     currentSum = 0;
-
-         // sol 2
         currentSum=max(arr[i],currentSum+arr[i]);
         maxSum = max(maxSum, currentSum);
     }
