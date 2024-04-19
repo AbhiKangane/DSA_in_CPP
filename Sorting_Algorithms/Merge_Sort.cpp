@@ -14,10 +14,11 @@ void printArray(int *A, int n){
 }
 
 void merge(int A[], int mid, int low, int high){
-    int i, j, k, B[100];
+    int i, j, k, n=high-low+1;
+    int B[n];
     i = low;
     j = mid + 1;
-    k = low;
+    k = 0;
 
     while (i <= mid && j <= high){
         if (A[i] < A[j]){
@@ -44,8 +45,8 @@ void merge(int A[], int mid, int low, int high){
         j++;
     }
 
-    rep(i,low,high+1)
-        A[i] = B[i];
+    rep(i,0,n)
+        A[i+low] = B[i];
 }
 
 void mergeSort(int A[], int low, int high){
