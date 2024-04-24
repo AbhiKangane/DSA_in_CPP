@@ -17,23 +17,7 @@ int solveRec(vector<int> &arr, int n, int ans){
 }
 
 
-// sol 2 : memoization
-int solveMem(vector<int> &arr, int n, vector<int> &dp){
-    if(dp[n] != -1)
-        return dp[n];
-
-    dp[n] = 1;  // single element is also LIS
-    for(int i=0; i<n; i++){
-        if(arr[n] > arr[i]){
-            dp[n] = max(dp[n], 1+solveMem(arr,i,dp));
-        }
-    }
-
-    return dp[n];
-}
-
-
-// sol 3 : tabulation
+// sol 2 : tabulation
 int solveTab(vector<int> &arr) {
     int n = arr.size(), ans=0;
     vector<int> dp(n, 1); // Initialize a DP array to store the length of LIS ending at each index
@@ -57,10 +41,6 @@ int LIS_size(vector<int> &arr){
     // return solveRec(arr,n-1,1);
 
     // sol 2
-    // vector<int> dp(n, -1);
-    // return solveMem(arr,n-1,dp); 
-
-    // sol 3
     return solveTab(arr);
 }
 
