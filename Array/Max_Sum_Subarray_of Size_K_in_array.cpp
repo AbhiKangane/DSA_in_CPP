@@ -1,7 +1,7 @@
-// find the maximum sum subarray of size k having sum at most maxSum
 #include<iostream>
 using namespace std;
 
+// function to find the maximum sum subarray of size k having sum at most maxSum
 int maxSum_Subsequence(int arr[], int n, int k, int maxSum){
     int sum=0, ans=0;
     for (int i = 0; i < k; i++){
@@ -19,6 +19,34 @@ int maxSum_Subsequence(int arr[], int n, int k, int maxSum){
             ans = max(ans, sum);
     }
     return ans;
+}
+
+
+// Function to find maximum_sumh subarray of size k.
+vector <int> max_of_subarrays(int *arr, int n, int k)
+{
+    int sum=0, ans=0;
+    for (int i = 0; i < k; i++){
+        sum += arr[i];
+    }
+    int end = k;
+    ans = sum;
+    
+    for (int i = k; i < n; i++){
+        sum -= arr[i-k]; // removing left number
+        sum += arr[i];   // adding right number
+
+        if(ans < sum){
+            end = i;
+            ans = max(ans, sum);
+        }
+    }
+    
+    vector<int> res;
+    for(int i=end-k+1; i<=end; i++)
+        res.push_back(arr[i]);
+    
+    return res;
 }
 
 int main(){
