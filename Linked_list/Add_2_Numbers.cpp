@@ -58,9 +58,9 @@ class Solution1{
 private:
     // iterative reversing linked list
     Node* reverse(Node* &head){
-	    Node *prev = NULL;
+	Node *prev = NULL;
     	Node *curr = head;
-	    Node *next = NULL;
+        Node *next = NULL;
 	
     	while(curr != NULL){
 	    	next = curr -> next;
@@ -128,23 +128,18 @@ public:
     struct Node* addTwoLists(struct Node* first, struct Node* second){
         while(first->data==0){
             first = first->next;
-            if(!first)
-                break;
+            if(!first)	break;
         }
         while(second->data==0){
             second = second->next;
-            if(!second)
-                break;
+            if(!second)	break;
         }
         // both are zeroes
-        if(!first && !second){
-            return new Node(0);
-        }
+        if(!first && !second)	return new Node(0);
         // first is 0
-        else if(!first)
-            return second;
-        else if(!second)
-            return first;
+        else if(!first)		return second;
+        // second is 0
+        else if(!second)	return first;
         
         // step 1: reversing input LL as while calculating sum we solve from right to left
         first = reverse(first);
@@ -211,19 +206,20 @@ private:
     
 public:
     struct Node* add_2_Num_LL(struct Node* first, struct Node* second){
-	while(first->data==0 && first->next!=NULL)
+	while(first->data==0){
             first = first->next;
-        while(second->data==0 && second->next!=NULL)
+            if(!first)	break;
+        }
+        while(second->data==0){
             second = second->next;
-            
+            if(!second)	break;
+        }
         // both are zeroes
-        if(!first && !second)
-            return new Node(0);
+        if(!first && !second)	return new Node(0);
         // first is 0
-        else if(!first)
-            return second;
-        else if(!second)
-            return first;
+        else if(!first)		return second;
+        // second is 0
+        else if(!second)	return first;
 	    
         // step 1: reversing input LL as while calculating sum we solve from right to left
         first = reverse(first);
