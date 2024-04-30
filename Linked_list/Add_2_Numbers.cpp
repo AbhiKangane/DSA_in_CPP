@@ -59,7 +59,7 @@ private:
     // iterative reversing linked list
     Node* reverse(Node* &head){
 	    Node *prev = NULL;
-    	    Node *curr = head;
+    	Node *curr = head;
 	    Node *next = NULL;
 	
     	while(curr != NULL){
@@ -68,9 +68,7 @@ private:
     		prev = curr;
 	    	curr = next;
 	    }
-
-	    // return head of reverse linked list
-	    return prev;
+        return prev;
     }
 
     void insertAtEnd(Node* &head, Node* &tail, int data){
@@ -89,8 +87,8 @@ private:
 
     Node* add(Node* first, Node* second){
         int carry = 0;
-         Node* ansHead = NULL;
-         Node* ansTail = NULL;
+        Node* ansHead = NULL;
+        Node* ansTail = NULL;
         
         while(first != NULL && second != NULL){
             int sum = carry + first->data + second->data;
@@ -106,6 +104,7 @@ private:
             int digit = sum%10;
             insertAtEnd(ansHead, ansTail, digit);
             carry = sum/10;
+            first = first->next;
         }
 
         while(second != NULL){
@@ -113,6 +112,7 @@ private:
             int digit = sum%10;
             insertAtEnd(ansHead, ansTail, digit);
             carry = sum/10;
+            second = second->next;
         }
 
         while(carry != 0){
@@ -125,7 +125,27 @@ private:
     }
     
 public:
-    struct Node* add_2_Num_LL(struct Node* first, struct Node* second){
+    struct Node* addTwoLists(struct Node* first, struct Node* second){
+        while(first->data==0){
+            first = first->next;
+            if(!first)
+                break;
+        }
+        while(second->data==0){
+            second = second->next;
+            if(!second)
+                break;
+        }
+        // both are zeroes
+        if(!first && !second){
+            return new Node(0);
+        }
+        // first is 0
+        else if(!first)
+            return second;
+        else if(!second)
+            return first;
+        
         // step 1: reversing input LL as while calculating sum we solve from right to left
         first = reverse(first);
         second = reverse(second);
