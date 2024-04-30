@@ -258,7 +258,7 @@ int main(){
     printList(head2);
 
     // Solution1 s1;                     // solution1 works only when equal no. of nodes present in both linked lists
-    // Node* sum1 = s1.add_2_Num_LL(head1, head2);
+    // Node* sum1 = s1.addTwoLists(head1, head2);
     // printList(sum1);
 
     Solution2 s2;
