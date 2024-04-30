@@ -191,6 +191,20 @@ private:
     
 public:
     struct Node* add_2_Num_LL(struct Node* first, struct Node* second){
+	while(first->data==0 && first->next!=NULL)
+            first = first->next;
+        while(second->data==0 && second->next!=NULL)
+            second = second->next;
+            
+        // both are zeroes
+        if(!first && !second)
+            return new Node(0);
+        // first is 0
+        else if(!first)
+            return second;
+        else if(!second)
+            return first;
+	    
         // step 1: reversing input LL as while calculating sum we solve from right to left
         first = reverse(first);
         second = reverse(second);
