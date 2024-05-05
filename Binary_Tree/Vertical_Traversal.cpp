@@ -34,6 +34,33 @@ node *build_tree(node *root)
     return root;
 }
 
+// LeetCode 987
+map<int, map<int, multiset<int>>> mp;
+void dfs(node* root, int x, int y) {
+    if (!root)
+        return;
+
+    mp[y][x].insert(root->val);
+    dfs(root->left, x + 1, y - 1);
+    dfs(root->right, x + 1, y + 1);
+}
+
+vector<vector<int>> verticalTraversal(node* root) {
+    vector<vector<int>> ans;
+    dfs(root, 0, 0);
+    for (auto columns : mp) {
+        vector<int> col;
+        for (auto rows : columns.second) {
+            for (int value : rows.second) {
+                col.push_back(value);
+            }
+        }
+        ans.push_back(col);
+    }
+    return ans;
+}
+// ends sol
+
 // Function to find the vertical order traversal of Binary Tree.
 vector<int> verticalOrder(node *root)
 {
@@ -64,16 +91,42 @@ vector<int> verticalOrder(node *root)
     }
 
     for (auto i : nodes)
-    {
-
         for (auto j : i.second)
-        {
-
             for (auto k : j.second)
-            {
                 ans.push_back(k);
-            }
-        }
+    
+    return ans;
+}
+
+// Finding Vertical sum of nodes in binary tree : GFG
+vector <int> verticalSum(node *root) {
+    map<int, int> nodes_Map; // map (HD, sum)
+    queue<pair<node *, int>> q;
+    vector<int> ans;
+
+    if (root == NULL)
+        return ans;
+
+    q.push(make_pair(root, 0));
+
+    while (!q.empty())
+    {
+        pair<node *, int> temp = q.front();
+        q.pop();
+        node *frontNode = temp.first;
+        int hd = temp.second;
+
+        nodes_Map[hd] += frontNode->data;
+
+        if (frontNode->left)
+            q.push(make_pair(frontNode->left, (hd - 1)));
+
+        if (frontNode->right)
+            q.push(make_pair(frontNode->right, (hd + 1)));
+    }
+    
+    for (auto i : nodes_Map){
+        ans.push_back(i.second);
     }
     return ans;
 }
