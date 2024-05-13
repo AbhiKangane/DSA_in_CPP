@@ -68,20 +68,35 @@ void makeCycle(node* head, int pos){
 void removeCycle(node* &head){
     node *slow = head;
     node *fast = head;
-    do{
-        slow = slow->next;
-        fast = fast->next->next;
-    }while(fast != slow);
-
-    fast= head;
-    while(slow->next != fast->next){
-        slow = slow->next;
-        fast = fast->next;
+    bool isLoop = false;
+	
+    while(fast != NULL && fast->next != NULL){
+	slow = slow->next;
+	fast = fast->next->next;
+	if(fast == slow){
+	    isLoop = true;
+	    break;
+	}
     }
-    // after this loop we get, slow->next = fast->next = Starting point of cycle
-    // for breaking cylce
-    slow->next = NULL;
+	
+    if(!isLoop)
+	return;
+	
+    fast = head;
+    while(slow != fast){
+	slow = slow->next;
+	fast = fast->next;
+    }
+	
+    Node* startOfLoop = slow;
+	
+    // remove the loop
+    while(slow->next != startOfLoop) 
+	slow = slow->next;
 
+    slow->next = NULL;
+	
+    return ;
 }
 
 
