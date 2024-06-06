@@ -1,6 +1,6 @@
 // diff bet Dijkstra Algo & Bellmon Ford Algo:
 // Dijkstra Algo : Not work for negative weighted edges 
-// Bellmon Ford Algo: work properly with negative edges
+// Bellmon Ford Algo: work properly with negative edges in weighted undirected graph
 
 #include<bits/stdc++.h>
 using namespace std;
