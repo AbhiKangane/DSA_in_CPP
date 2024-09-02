@@ -18,6 +18,7 @@ bool is_Cyclic_BFS(int src, unordered_map<int,bool> &visited, unordered_map<int,
         q.pop();
 
         for(auto neighbour: adj[front]){
+            // if neighbour is already visited but not parent of src then cycle is present
             if(visited[neighbour] == true && neighbour != parent[front])
                 return true;
             
@@ -47,9 +48,60 @@ bool is_Cyclic_DFS(int vertex, int parent, unordered_map<int, bool> &visited, un
     return false;
 }
 
+// method 3: using DSU
+// DSU ka code : find() & Union() functions
+vector<int> parent;
+vector<int> Rank;
+
+int find(int x){
+    return (x == parent[x]) ? x : (parent[x] = find(parent[x]));
+}
+
+void Union(int x, int y){
+    int x_parent = find(x);
+    int y_parent = find(y);
+
+    if(x_parent == y_parent)
+        return;
+
+    if(Rank[x_parent] > Rank[y_parent])
+        parent[y_parent] = x_parent;
+    
+    else if(Rank[x_parent] < Rank[y_parent])
+        parent[x_parent] = y_parent;
+    
+    else{
+        parent[x_parent] = y_parent;
+        Rank[y_parent]++;
+    }
+}
+
+bool is_Cyclic_DSU(int V, unordered_map<int, list<int>> &adj){
+    parent.resize(V);
+    Rank.resize(V,1);
+
+    for(int i=0; i<V; i++)
+        parent[i] = i;
+
+    for(auto &pairs : adj){
+        int u = pairs.first;
+        for(int &v : pairs.second){
+            if(u < v){
+                int u_parent = find(u);
+                int v_parent = find(v);
+
+                if(u_parent == v_parent)
+                    return 1;
+                
+                Union(u,v);
+            }
+        }
+    }
+    return 0;
+}
 
 string cycle_Detection(vector<vector<int>> &edges, int V, int E){
-    // crete adj list
+    // create adj list
     unordered_map<int, list<int>> adj;
     for(int i=0; i<E; i++){
         int u = edges[i][0];
@@ -59,24 +111,28 @@ string cycle_Detection(vector<vector<int>> &edges, int V, int E){
         adj[v].push_back(u);
     }
 
+    // by using DSU
+    return (is_Cyclic_DSU(V, adj) == 1) ? "YES" : "NO";
+
+
     // to handle disconnected components
-    unordered_map<int, bool> visited;
-    for(int i=0; i<V; i++){
-        if(!visited[i]){
-            // bool ans = is_Cyclic_BFS(i, visited, adj);
-            bool ans = is_Cyclic_DFS(i, -1, visited, adj);
-            if(ans == 1)
-                return "Yes";
-        }
-    }
-    return "No";
+    // unordered_map<int, bool> visited;
+    // for(int i=0; i<V; i++){
+    //     if(!visited[i]){
+    //         // bool ans = is_Cyclic_BFS(i, visited, adj);
+    //         bool ans = is_Cyclic_DFS(i, -1, visited, adj);
+    //         if(ans == 1)
+    //             return "Yes";
+    //     }
+    // }
+    // return "No";
 }
 
 
 int main(){
     vector<vector<int>> Edges {{0,1}, {1,2}, {2,3}, {3,4}, {0,4}, {4,5}};
 
-    cout<<"Is given graph contains cycle: "<<cycle_Detection(Edges, 5, 6);
+    cout<<"Is given graph contains cycle: "<<cycle_Detection(Edges, 6, 6);
 
     return 0;
 }
