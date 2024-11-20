@@ -1,3 +1,6 @@
+// GFG : https://www.geeksforgeeks.org/problems/longest-subarray-with-sum-divisible-by-k1259/1
+// Given an array arr and a positive integer k, find the length of the longest subarray with the sum of the elements divisible by the given value k
+
 #include <bits/stdc++.h>
 using namespace std;
 
