@@ -6,6 +6,26 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+bool checkBipartiteDFS(vector<vector<int>> adj, vector<int>&color, int curr, int currColor){
+    color[curr] = currColor; // color kardiya
+    
+    for(int &neighbor : adj[curr]){
+        // same color
+        if(color[neighbor] == color[curr])
+            return false;
+        
+        // never colored
+        if(color[neighbor] == -1){
+            int newColor = 1-currColor;
+            
+            if(checkBipartiteDFS(adj,color,neighbor,newColor) == false){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 bool checkBFS(vector<vector<int>> &adj, int node, vector<int>&color, int currColor){
     queue<int> q;
     q.push(node);
@@ -34,6 +54,7 @@ bool isBipartite(vector<vector<int>>& adj) {
     // red:1, green:0
     for(int i=0; i<V; i++){
         if(color[i] == -1){
+            // if(!checkBipartite(adj,color,i,1));
             if(!checkBFS(adj,i,color,1))
                 return false;
         }
