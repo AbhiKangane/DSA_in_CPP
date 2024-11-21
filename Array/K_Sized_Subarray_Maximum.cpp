@@ -1,4 +1,6 @@
-// print maximum nof all subarrays of size k
+// GFG : https://www.geeksforgeeks.org/problems/maximum-of-all-subarrays-of-size-k3101/1
+// Given an array arr[] of integers and an integer k, your task is to find the maximum value for each contiguous subarray of size k. 
+// The output should be an array of maximum values corresponding to each contiguous subarray.
 #include<bits/stdc++.h>
 using namespace std;
 
