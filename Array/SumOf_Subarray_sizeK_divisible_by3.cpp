@@ -1,3 +1,5 @@
+// Print 1st subarray of size k having sum divisible by k.
+
 #include<iostream>
 #include<vector>
 using namespace std;
