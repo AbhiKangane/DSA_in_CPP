@@ -1,3 +1,4 @@
+// Print the mode of integer array. If 2 or more numbers having same frequency then prints 1st number having maximum frequency. 
 #include<iostream>
 #include<vector>
 #include<unordered_map>
@@ -14,7 +15,7 @@ int mode(vector<int> &arr){
     }
 
     for (int i = 0; i < n; i++){
-        if(maxFreq == count[arr[i]]){ //when frequency of more than 1 numbers are same then it will returns 1st numbers in array
+        if(maxFreq == count[arr[i]]){ //when frequency of more than 1 numbers are same then it will returns 1st maxFreq number in array
             maxAns = arr[i];
             break;
         }
