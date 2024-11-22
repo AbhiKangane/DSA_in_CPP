@@ -60,16 +60,6 @@ public:
     }
 };
 
-// Print matrix
-void Print(vector<vector<char>> matrix){
-    for(auto i: matrix){
-        for(auto j: i)
-            cout<<j<<" ";
-        cout<<endl;
-    }
-}
-
-
 int main(){
     int t;
     cout<<"Enter the no. of testcases: ";
