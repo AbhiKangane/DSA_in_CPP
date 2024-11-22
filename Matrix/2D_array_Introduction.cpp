@@ -1,17 +1,12 @@
 #include<iostream> 
 using namespace std; 
 
+// searching in 2d array
 bool isPresent(int arr[][3], int target, int row, int col) {
-
-  for(int row=0; row<3; row++) {
-        for(int col=0; col<3; col++) {
-            
-            if( arr[row][col] == target) {
+  for(int row=0; row<3; row++)
+        for(int col=0; col<3; col++)         
+            if( arr[row][col] == target) 
                 return 1;
-            }
-            
-        }
-    }
     return 0;
 }
 
@@ -25,7 +20,6 @@ void printColSum(int arr[][3], int row, int col) {
         }
         cout << sum << " ";
     }
-
     cout << endl;
 }
 
@@ -40,12 +34,10 @@ void printSum(int arr[][3], int row, int col) {
         }
         cout << sum << " ";
     }
-
     cout << endl;
 }
 
 int largestRowSum(int arr[][3], int row, int col) {
-
     int maxi = 0;
     int rowIndex = -1;
 
@@ -59,15 +51,12 @@ int largestRowSum(int arr[][3], int row, int col) {
             maxi = sum;
             rowIndex = row;
         }
-       
     }
-
     cout << "the maximum sum is " << maxi << endl;
     return rowIndex;
 }
 
 int main() {
-
     //create 2 d array
     int arr[3][3];
     //int arr[3][4] = {1,2,3,4,5,6,7,8,9,10,14,16};
@@ -80,8 +69,6 @@ int main() {
             cin >> arr[row][col];
         }
     }
-
-
 /*
 //taking input -> col wise input
     for(int col=0; col<4; col++) {
