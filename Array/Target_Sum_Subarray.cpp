@@ -1,3 +1,4 @@
+// Print the 1st & last index of subarray having sum equals to target sum
 #include<bits/stdc++.h>
 using namespace std;
 
