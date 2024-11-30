@@ -1,5 +1,6 @@
 /*
-Given a 2D binary matrix A(0-based index) of dimensions NxM. 
+GFG: https://www.geeksforgeeks.org/problems/shortest-source-to-destination-path3544/1
+Given a 2D binary matrix A(0-based index) of dimensions N x M. 
 Find the minimum number of steps required to reach from (0,0) to (X, Y).
 Note: You can only move left, right, up and down, and only through cells that contain 1.
 */
