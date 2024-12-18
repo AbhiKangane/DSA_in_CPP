@@ -11,7 +11,7 @@ vector<int> nextSmallerElement(vector<int> &arr, int n)
 
     for(int i=n-1; i>=0 ; i--) {
         int curr = arr[i];
-        while(s.top() >= curr)
+        while(s.top()!=-1 && s.top() >= curr)
         {
             s.pop();
         }
