@@ -31,10 +31,10 @@ bool isSuper_Sequence(string p, string q, string r){
     
     int i=0, j=0; 
     for(int k=0; k<r.size(); k++){
-        if(p[i]==r[k]){
+        if(i < p.size() && p[i]==r[k]){
             i++;
         }
-        else if(q[j]==r[k]){
+        else if(j < p.size() && q[j]==r[k]){
             j++;;
         }
     }
