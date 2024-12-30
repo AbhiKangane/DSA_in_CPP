@@ -10,6 +10,7 @@ Ex 2) p="tcs", q="nqt" r="tqncsnt"
 output : false
 */
 #include<iostream>
+#include<vector>
 #include<unordered_map>
 using namespace std;
 
@@ -78,7 +79,7 @@ bool isSupersequenceHelper(const string &p, const string &q, const string &r, in
 }
 
 // Main function to check if `r` is a supersequence of `p` and `q`
-bool isSupersequence(const string &p, const string &q, const string &r) {
+bool isSuperSequence(const string &p, const string &q, const string &r) {
     int n = p.size(), m = q.size(), o = r.size();
 
     // Initialize memoization table with -1
@@ -91,10 +92,10 @@ bool isSupersequence(const string &p, const string &q, const string &r) {
 
 int main(){
     string p,q,r;
-    // cout<<"Enter the strings p, q, r: ";
-    // cin>>p>>q>>r;
+    cout<<"Enter the strings p, q, r: ";
+    cin>>p>>q>>r;
 
-    if(isSuper_Sequence(p,q,r))
+    if(isSuper_Sequence1(p,q,r))
         cout<<"True";
     else
         cout<<"False";
