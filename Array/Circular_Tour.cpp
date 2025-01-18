@@ -1,7 +1,10 @@
-// problem GFG: given two arrays 
-// 1) petrol => amount of petrol at every petrol pump
-// 2) distance => distance from petrol pump to next petrol pump
-// we have to starting point of circular tour
+// problem GFG: https://www.geeksforgeeks.org/problems/circular-tour-1587115620/1
+// 1) petrol[i] => amount of petrol at every petrol pump
+// 2) distance[i] => distance from petrol pump to next petrol pump
+// You have a car with an unlimited petrol tank. You begin the journey with an empty tank from one of the gas stations. 
+// Return the index of the starting gas station if it's possible to travel around the circuit without running out of petrol at any station in a clockwise direction. 
+// If there is no such starting station exists, return -1.
+// Note: If a solution exists, it is guaranteed to be unique.
 // assuming in 1 ltr petrol vehicle goes 1 unit distance
 
 #include<bits/stdc++.h>
