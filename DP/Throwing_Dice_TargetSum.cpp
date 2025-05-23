@@ -1,3 +1,4 @@
+// GFG : https://www.geeksforgeeks.org/problems/dice-throw5349/1
 // given D dice of F faces throws & 
 // we have to find the no. of ways of getting sum of numbers obtained of upper face of dice equals to target(T)
 
