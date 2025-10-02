@@ -64,36 +64,29 @@ vector<vector<int>> Combination_Sum_II(vector<int> &arr, int target){
 // Part III :Find all valid combinations of k numbers that sum up to n such that the following conditions are true:
 // Only numbers 1 through 9 are used.
 // Each number is used at most once.
-void findAll3(vector<int> &arr, int target, int curr,
-             vector<vector<int>> &ans, vector<int> &temp, int k)
-{
-    if(target == 0){
-        if(temp.size() == k)
-            ans.push_back(temp);
-        return;
-    }
+void findAll3(int curr, int target, int reqSize, vector<vector<int>> &ans, vector<int> &temp){
+      if(target == 0 && temp.size()==reqSize){
+          ans.push_back(temp);
+          return;
+      }
+  
+      for(int k=curr; k<10; k++){
+          if(k <= target){
+              temp.push_back(k);
+              findAll(k+1,target-k,reqSize,ans,temp);
+              temp.pop_back();
+          }
+      }
+  }   
 
-    for(int i=curr; i<arr.size(); i++){
-        // avoid duplicates
-        if(curr<i && arr[i] == arr[i-1])
-            continue;
-
-        if(arr[curr] <= target){
-            temp.push_back(arr[i]);
-            findAll3(arr,target-arr[i],i+1,ans,temp, k);
-            temp.pop_back();
-        }
-    }
-}  
-
-
-vector<vector<int>> Combination_Sum_III(int k, int target) {
-    vector<int> arr = {1,2,3,4,5,6,7,8,9};
-    vector<vector<int>> ans;
-    vector<int> temp;
-    findAll3(arr, target, 0, ans, temp, k);
-    return ans;
-}
+  vector<vector<int>> Combination_Sum_III(int n, int k) {
+      vector<vector<int>> ans;
+      if(n > 45)
+          return ans;
+      vector<int> temp;
+      findAll(1, n, k, ans, temp);
+      return ans;
+  }
 
 int main(){
     int target = 8;
@@ -125,4 +118,5 @@ int main(){
         }
         cout<<endl;
     }
+
 }
