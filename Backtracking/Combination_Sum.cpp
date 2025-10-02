@@ -65,12 +65,18 @@ vector<vector<int>> Combination_Sum_II(vector<int> &arr, int target){
 // Only numbers 1 through 9 are used.
 // Each number is used at most once.
 void findAll3(int curr, int target, int reqSize, vector<vector<int>> &ans, vector<int> &temp){
+      // base case
       if(target == 0 && temp.size()==reqSize){
           ans.push_back(temp);
           return;
       }
+      // pruning: stop if size exceeded
+      if (temp.size() > reqSize) return;
   
       for(int k=curr; k<10; k++){
+          // prune: if k > target, no point in continuing (numbers are increasing)
+          if (k > target) break;
+        
           if(k <= target){
               temp.push_back(k);
               findAll(k+1,target-k,reqSize,ans,temp);
@@ -120,3 +126,4 @@ int main(){
     }
 
 }
+
