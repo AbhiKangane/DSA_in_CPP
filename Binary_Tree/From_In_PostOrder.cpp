@@ -16,7 +16,7 @@ class node{
 };
 
 // Solution 1:
-//  for finding positon in innorder array
+//  for finding position in inorder array
 int findPosition(int in[], int element, int size){
     for(int i=0; i<size; i++){
         if(element == in[i])
@@ -118,4 +118,5 @@ int main(){
     PreOrder(root);
 
     return 0;
+
 }
