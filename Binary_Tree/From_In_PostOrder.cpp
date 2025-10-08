@@ -30,7 +30,7 @@ node* Solve(int in[], int post[], int index, int inorderStart, int inorderEnd, i
     if(index < 0 || inorderStart > inorderEnd)
         return NULL;
     
-    int element = post[index--]; // starting from end of PreOrder
+    int element = post[index--]; // starting from end of PostOrder
     node* root = new node(element);
     int position = findPosition(in,element, size);  // finding position of root in inorder
 
@@ -120,3 +120,4 @@ int main(){
     return 0;
 
 }
+
