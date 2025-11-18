@@ -2,6 +2,11 @@
 // Dijkstra Algo : Not work for negative weighted edges 
 // Bellmon Ford Algo: work properly with negative edges in weighted undirected graph
 
+// GFG : https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1
+// Given an weighted graph with V vertices numbered from 0 to V-1, src as source vertex and 2d array E edges[][], where edges[i] = [u, v, w] represents a direct edge from node u to v having w edge weight.
+// Your task is to compute the shortest distances from the source to all other vertices. If a vertex is unreachable from the source, its distance should be marked as 10^8. 
+// Additionally, if the graph contains a negative weight cycle, return [-1] to indicate that shortest paths cannot be reliably computed.
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -57,3 +62,4 @@ int main(){
 
     cout<<"Shortest path between "<<src<<" & "<<dest<<" : "<<bellmonFord(v, e, src, dest, edges);
 }
+
