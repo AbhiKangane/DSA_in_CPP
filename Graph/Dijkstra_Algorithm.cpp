@@ -74,6 +74,50 @@ vector<int> dijkstra2(unordered_map<int, list<pair<int,int>>> &adj, int V, int S
     return result;
 }
 
+// GFG: https://www.geeksforgeeks.org/problems/number-of-ways-to-arrive-at-destination/1
+// Count total no. of ways to travel from node 0 to node V - 1 in the shortest amount of time.
+int countPaths(int V, vector<vector<int>>& edges) {
+    // code here
+    unordered_map<int,vector<pair<int,int>>> adj; // <u,(v,time)>
+    for(auto edge: edges){
+        int u = edge[0];
+        int v = edge[1];
+        int time = edge[2];
+        
+        adj[u].push_back({v,time});
+        adj[v].push_back({u,time});
+    }
+    
+    priority_queue< pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+    vector<int> Dist(V,INT_MAX), ways(V,0);
+    
+    Dist[0] = 0;
+    ways[0] = 1;
+    pq.push({0,0});
+
+    while(!pq.empty()){
+        int d = pq.top().first;
+        int node = pq.top().second;
+        pq.pop();
+
+        for(auto &v : adj[node]){
+            int adjNode = v.first;
+            int adjDist = v.second;
+
+            if(d + adjDist < Dist[adjNode]){
+                Dist[adjNode] = d+adjDist;
+                ways[adjNode] =  ways[node];
+                pq.push({d+adjDist, adjNode});
+            }
+            else if(d + adjDist == Dist[adjNode])
+            {
+                ways[adjNode] +=  ways[node];    
+            }
+        }
+    }
+    return ways[V-1];
+}
+
 
 int main(){
 /*       2           3          5   
@@ -115,3 +159,4 @@ int main(){
     
     return 0;
 }
+
